@@ -35,6 +35,9 @@ HOSTCC         = gcc
 ROMFSINST      = $(ROOTDIR)/tools/romfs-inst.sh
 TFTPDIR        = /tftpboot
 PATH          := $(PATH):$(ROOTDIR)/tools:$(ROOTDIR)/tools/go/go/bin
+export GOROOT=/opt/rt-n56u/trunk/tools/go/go
+export GOBIN=/opt/rt-n56u/trunk/tools/go/go/bin/
+export GOTOOLDIR=/opt/rt-n56u/trunk/tools/go/go/pkg/tool/linux_amd64
 
 VERSIONSTR     = $(CONFIG_VENDOR)/$(CONFIG_PRODUCT) Version $(VERSIONPKG)
 
