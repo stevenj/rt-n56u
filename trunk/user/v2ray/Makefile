@@ -6,7 +6,7 @@ ifeq ($(ENABLE_GO111MODULE),y)
 export GO111MODULE=on
 export GOPROXY=https://goproxy.io
 endif
-V2ray_VERSION := 4.31.2
+V2ray_VERSION := 4.31.3
 V2ray_URL := https://codeload.github.com/v2ray/v2ray-core/tar.gz/v$(V2ray_VERSION)
 V2RAY_SED_ARGS:=
 V2RAY_SED_ARGS += \
@@ -35,7 +35,7 @@ build_v2ray:
 	sed -i \
 			'$(V2RAY_SED_ARGS)' \
 			distro/all/all.go ; \
-	GOOS=linux GOARCH=mipsle go build -ldflags "-w -s" -o $(THISDIR)/bin/v2ray; \
+	GOOS=linux GOARCH=mipsle GOBIN="/opt/rt-n56u/trunk/tools/go/go/bin/go" go build -ldflags "-w -s" -o $(THISDIR)/bin/v2ray; \
 	)
 
 clean:
