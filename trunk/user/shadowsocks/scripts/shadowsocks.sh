@@ -100,7 +100,7 @@ get_arg_out() {
 start_rules() {
     logger -t "SS" "正在添加防火墙规则..."
 	lua /etc_ro/ss/getconfig.lua $GLOBAL_SERVER > /tmp/server.txt
-	server=`cat /tmp/server.txt` 
+	server=`cat /tmp/server.txt`
 	cat /etc/storage/ss_ip.sh | grep -v '^!' | grep -v "^$" >$wan_fw_ips
 	cat /etc/storage/ss_wan_ip.sh | grep -v '^!' | grep -v "^$" >$wan_bp_ips
 	#resolve name
@@ -124,7 +124,7 @@ start_rules() {
 	if [ "$UDP_RELAY_SERVER" != "nil" ]; then
 		ARG_UDP="-U"
 		lua /etc_ro/ss/getconfig.lua $UDP_RELAY_SERVER > /tmp/userver.txt
-	    udp_server=`cat /tmp/userver.txt` 
+	    udp_server=`cat /tmp/userver.txt`
 		udp_local_port="1080"
 	fi
 	if [ -n "$lan_ac_ips" ]; then
@@ -221,7 +221,7 @@ start_redir_tcp() {
 	esac
 	return 0
 	}
-	
+
 start_redir_udp() {
 	if [ "$UDP_RELAY_SERVER" != "nil" ]; then
 		redir_udp=1
@@ -300,7 +300,7 @@ EOF
 			ipset add gfwlist $dnsserver 2>/dev/null
 			logger -st "SS" "启动dns2tcp：5353端口..."
 			dns2tcp -L"127.0.0.1#5353" -R"$dnsstr" >/dev/null 2>&1 &
-			pdnsd_enable_flag=0	
+			pdnsd_enable_flag=0
 			logger -st "SS" "开始处理gfwlist..."
 		fi
 		;;
@@ -422,7 +422,7 @@ EOF
 }
 
 # ================================= 启动 SS ===============================
-ssp_start() { 
+ssp_start() {
     ss_enable=`nvram get ss_enable`
 if rules; then
 		if start_redir_tcp; then
@@ -471,7 +471,7 @@ clear_iptable()
 	iptables -t filter -D INPUT -p tcp --dport $s5_port -j ACCEPT
 	ip6tables -t filter -D INPUT -p tcp --dport $s5_port -j ACCEPT
 	ip6tables -t filter -D INPUT -p tcp --dport $s5_port -j ACCEPT
-	
+
 }
 
 kill_process() {
@@ -494,7 +494,7 @@ kill_process() {
 		killall ssr-redir >/dev/null 2>&1
 		kill -9 "$rssredir" >/dev/null 2>&1
 	fi
-	
+
 	sslocal_process=$(pidof ss-local)
 	if [ -n "$sslocal_process" ]; then
 		logger -t "SS" "关闭ss-local进程..."
@@ -515,7 +515,7 @@ kill_process() {
 		killall kumasocks >/dev/null 2>&1
 		kill -9 "$kumasocks_process" >/dev/null 2>&1
 	fi
-	
+
 	ipt2socks_process=$(pidof ipt2socks)
 	if [ -n "$ipt2socks_process" ]; then
 		logger -t "SS" "关闭ipt2socks进程..."
@@ -536,7 +536,7 @@ kill_process() {
 		killall ssr-server >/dev/null 2>&1
 		kill -9 "$ssrs_process" >/dev/null 2>&1
 	fi
-	
+
 	cnd_process=$(pidof chinadns-ng)
 	if [ -n "$cnd_process" ]; then
 		logger -t "SS" "关闭chinadns-ng进程..."
@@ -550,7 +550,7 @@ kill_process() {
 		killall dns2tcp >/dev/null 2>&1
 		kill -9 "$dns2tcp_process" >/dev/null 2>&1
 	fi
-	
+
 	microsocks_process=$(pidof microsocks)
 	if [ -n "$microsocks_process" ]; then
 		logger -t "SS" "关闭socks5服务端进程..."
